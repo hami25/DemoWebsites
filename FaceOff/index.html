@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face Off – Friseursalon Wiesbaden</title>
+<template id="__bundler_thumbnail">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 56">
+  <rect width="80" height="56" fill="#1c1c1c"/>
+  <text x="40" y="34" font-family="Georgia,serif" font-size="22" font-weight="700" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="0.8" text-anchor="middle" letter-spacing="2">FACE</text>
+  <text x="40" y="50" font-family="Georgia,serif" font-size="10" fill="rgba(255,255,255,0.2)" text-anchor="middle" letter-spacing="4">OFF</text>
+</svg>
+</template>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #1c1c1c;
+  --off-black: #252525;
+  --dark: #2e2e2e;
+  --mid: #555555;
+  --gray: #999999;
+  --light: #cccccc;
+  --off-white: #f2f2f0;
+  --white: #ffffff;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', Helvetica Neue, sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--off-white); color: var(--black); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 72px;
+  background: rgba(24,24,24,0.95); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.nav-logo {
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.nav-links { display: flex; align-items: center; gap: 2.4rem; }
+.nav-links a { color: var(--light); text-decoration: none; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-book {
+  background: var(--white); color: var(--black); text-decoration: none;
+  padding: 10px 24px; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.25s;
+}
+.nav-book:hover { background: transparent; color: var(--white); outline: 1px solid var(--white); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh; background: #181818;
+  display: grid; grid-template-columns: 1fr 1fr;
+  padding-top: 72px; position: relative; overflow: hidden;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 60% 70% at 20% 50%, rgba(200,200,200,0.045) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 75% 80%, rgba(255,255,255,0.025) 0%, transparent 60%);
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 6% 80px 8%;
+}
+.hero-eyebrow {
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gray); margin-bottom: 28px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--mid); }
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(3rem, 5vw, 5.5rem);
+  font-weight: 700; line-height: 1.0; color: var(--white);
+  margin-bottom: 28px;
+}
+.hero h1 em { font-style: italic; display: block; color: var(--light); }
+.hero-desc {
+  color: var(--gray); font-size: 1rem; line-height: 1.8;
+  max-width: 400px; margin-bottom: 44px; font-weight: 300;
+}
+.hero-ctas { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.btn-white {
+  background: var(--white); color: var(--black); text-decoration: none;
+  padding: 16px 36px; font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase; transition: all 0.25s;
+  display: inline-block;
+}
+.btn-white:hover { background: var(--off-white); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--white); text-decoration: none;
+  padding: 16px 30px; font-size: 0.82rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.2); transition: all 0.25s;
+  display: inline-block;
+}
+.btn-outline:hover { border-color: var(--white); }
+.hero-phone { color: var(--gray); font-size: 0.85rem; margin-top: 36px; letter-spacing: 0.04em; }
+.hero-phone strong { color: var(--white); }
+
+.hero-right {
+  position: relative; overflow: hidden;
+  background: #282828;
+  min-height: 500px; width: 100%;
+  display: flex; align-items: flex-end; justify-content: flex-end;
+}
+.hero-bg-text {
+  position: absolute; bottom: -20px; right: -20px;
+  font-family: var(--serif); font-size: clamp(120px, 18vw, 220px);
+  font-weight: 700; color: rgba(255,255,255,0.03); line-height: 1;
+  user-select: none; pointer-events: none;
+  white-space: nowrap;
+}
+.hero-type-bg {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center;
+  padding: 0 0 0 4%;
+  overflow: hidden; position: relative;
+}
+.hero-type-word {
+  font-family: var(--serif);
+  font-size: clamp(100px, 14vw, 180px);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  /* Outlined / cut-out effect */
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.5);
+  user-select: none;
+  display: block;
+  transition: -webkit-text-stroke 0.3s;
+}
+.hero-type-off {
+  -webkit-text-stroke: 1.5px rgba(255,255,255,0.65);
+  /* Second word shifts right for dynamic layout */
+  margin-left: 18%;
+  /* Partial bleed: clip right edge */
+}
+/* Fade out right edge */
+.hero-type-bg::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 30%;
+  background: linear-gradient(to right, transparent, #282828);
+  pointer-events: none;
+}
+/* Fade out top & bottom slightly */
+.hero-type-bg::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 30%;
+  background: linear-gradient(to bottom, #181818, transparent);
+  pointer-events: none; z-index: 1;
+}
+
+/* Floating badge */
+.hero-badge {
+  position: absolute; top: 48px; left: -20px;
+  background: var(--white); color: var(--black);
+  padding: 20px 24px; z-index: 10;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+}
+.hero-badge .num { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; display: block; line-height: 1; }
+.hero-badge .lbl { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); display: block; margin-top: 4px; }
+
+/* ─── SECTION UTILS ─── */
+section { padding: 110px 8%; }
+.max-w { max-width: 1200px; margin: 0 auto; }
+.s-tag {
+  display: inline-block; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+}
+.s-tag::before { content: ''; display: block; width: 32px; height: 1px; background: currentColor; }
+.s-title { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 700; line-height: 1.15; color: var(--black); margin-bottom: 20px; }
+.s-title em { font-style: italic; }
+.s-sub { color: var(--mid); font-size: 0.97rem; line-height: 1.8; font-weight: 300; max-width: 500px; }
+
+/* ─── SECTION TRANSITIONS ─── */
+/* Hero → Über uns: black stays */
+/* Über uns (black) → Leistungen (off-white): gradient bridge */
+
+
+/* Leistungen (off-white) → Galerie (black) */
+
+
+/* Galerie (black) → Testimonials (off-white) */
+#galerie {
+  position: relative;
+}
+
+/* Testimonials (off-white) → Buchung (black) */
+
+
+
+/* ─── ÜBER UNS ─── */
+#ueber-uns { background: #1e1e1e; }
+#ueber-uns .s-tag, #ueber-uns .s-title { color: var(--white); }
+#ueber-uns .s-sub { color: var(--gray); }
+#ueber-uns::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 55% 50% at 75% 40%, rgba(255,255,255,0.04) 0%, transparent 65%);
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-placeholder {
+  aspect-ratio: 3/4; background: #2a2a2a;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px; color: #2a2a2a; font-size: 0.72rem;
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.about-placeholder svg { width: 48px; height: 48px; stroke: #2a2a2a; fill: none; stroke-width: 1; stroke-linecap: round; }
+.about-pull {
+  font-family: var(--serif); font-size: 1.35rem; font-style: italic;
+  color: var(--light); line-height: 1.6; border-left: 1px solid rgba(255,255,255,0.15);
+  padding-left: 28px; margin: 32px 0;
+}
+.about-detail { color: var(--gray); font-size: 0.9rem; line-height: 1.8; font-weight: 300; }
+
+/* ─── LEISTUNGEN / PREISE ─── */
+#leistungen { background: #f8f8f6; }
+.services-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid #e0e0e0; box-shadow: 0 8px 48px rgba(0,0,0,0.08), 0 2px 0 rgba(0,0,0,0.04); }
+.service-category { padding: 48px; border-right: 1px solid #e0e0e0; }
+.service-category:nth-child(even) { border-right: 0; }
+.service-category:nth-child(n+3) { border-top: 1px solid #e0e0e0; }
+.service-category h3 {
+  font-family: var(--serif); font-size: 1.3rem; font-weight: 700;
+  margin-bottom: 28px; padding-bottom: 18px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.price-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,0.05);
+  font-size: 0.9rem;
+}
+.price-row:last-child { border-bottom: 0; }
+.price-row .pname { color: var(--dark); font-weight: 400; }
+.price-row .pdesc { color: var(--gray); font-size: 0.78rem; font-weight: 300; margin-top: 2px; display: block; }
+.price-row .pprice { color: var(--black); font-weight: 600; font-size: 0.95rem; white-space: nowrap; margin-left: 16px; }
+.service-note {
+  margin-top: 32px; padding: 16px; background: var(--black); color: var(--white);
+  font-size: 0.8rem; letter-spacing: 0.05em; line-height: 1.7; font-weight: 300;
+}
+
+/* ─── GALERIE ─── */
+#galerie { background: #222222; padding: 110px 4%; }
+#galerie::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 50% 40% at 80% 30%, rgba(255,255,255,0.03) 0%, transparent 60%);
+}
+#galerie .s-tag { color: var(--gray); }
+#galerie .s-title { color: var(--white); }
+.gallery-head { padding: 0 4%; margin-bottom: 48px; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 3px;
+}
+.gallery-item {
+  background: var(--dark); overflow: hidden; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  color: #222; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  border: 1px solid #1a1a1a;
+}
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7) 100%);
+  z-index: 1;
+}
+.gallery-item svg { width: 32px; height: 32px; stroke: #282828; fill: none; stroke-width: 1; }
+.gallery-ratio-1 { aspect-ratio: 3/4; }
+.gallery-ratio-2 { aspect-ratio: 4/5; }
+.gallery-label {
+  position: absolute; bottom: 16px; left: 16px;
+  z-index: 2; color: rgba(255,255,255,0.4);
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* ─── TESTIMONIALS ─── */
+#testimonials { background: #f8f8f6; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #e0e0e0; border: 1px solid #d4d4d4; box-shadow: 0 12px 48px rgba(0,0,0,0.09); }
+.review-card { background: var(--white); padding: 40px 36px; transition: background 0.25s; }
+.review-card:hover { background: #fafafa; }
+.review-stars { display: flex; gap: 3px; margin-bottom: 20px; }
+.review-stars span { font-size: 0.85rem; color: var(--black); }
+.review-text {
+  font-family: var(--serif); font-style: italic; font-size: 1rem;
+  line-height: 1.75; color: var(--dark); margin-bottom: 24px;
+}
+.reviewer { border-top: 1px solid #f0f0f0; padding-top: 20px; }
+.reviewer-name { font-weight: 600; font-size: 0.85rem; letter-spacing: 0.04em; }
+.reviewer-sub { font-size: 0.75rem; color: var(--gray); margin-top: 3px; }
+
+/* ─── BUCHUNG ─── */
+#buchung { background: #1e1e1e; position: relative; }
+#buchung::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(255,255,255,0.03) 0%, transparent 65%);
+}
+
+#buchung .s-tag { color: var(--gray); }
+#buchung .s-title { color: var(--white); }
+#buchung .s-sub { color: var(--gray); }
+.booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; margin-top: 56px; }
+.booking-form { background: var(--white); padding: 44px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 0 60px rgba(255,255,255,0.06), 0 24px 64px rgba(0,0,0,0.5);
+}
+.booking-form h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 28px; font-weight: 700; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f-group { margin-bottom: 16px; }
+.f-group label { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 8px; }
+.f-group input, .f-group select, .f-group textarea {
+  width: 100%; padding: 13px 14px;
+  border: 1px solid #e0e0e0; background: var(--off-white);
+  font-family: var(--sans); font-size: 0.9rem; color: var(--black);
+  outline: none; transition: border-color 0.2s;
+}
+.f-group input:focus, .f-group select:focus, .f-group textarea:focus { border-color: var(--black); background: white; }
+.f-group textarea { min-height: 90px; resize: vertical; }
+.f-submit {
+  width: 100%; padding: 16px; background: var(--black); color: var(--white);
+  border: none; font-family: var(--sans); font-size: 0.8rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
+}
+.f-submit:hover { background: var(--dark); }
+
+.booking-info { color: var(--gray); }
+.booking-hours { margin-bottom: 40px; }
+.booking-hours h4 { font-family: var(--serif); font-size: 1.4rem; color: var(--white); margin-bottom: 24px; font-style: italic; }
+.hours-table { width: 100%; border-collapse: collapse; }
+.hours-table td { padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.07); font-size: 0.88rem; }
+.hours-table td:first-child { color: var(--gray); }
+.hours-table td:last-child { text-align: right; color: var(--white); font-weight: 500; }
+.hours-table tr.closed td { color: #333; }
+.booking-contact { margin-top: 36px; }
+.booking-contact h4 { font-family: var(--serif); font-size: 1.3rem; color: var(--white); margin-bottom: 18px; font-style: italic; }
+.contact-line { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.contact-line svg { width: 18px; height: 18px; stroke: var(--gray); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; min-width: 18px; }
+.contact-line span { font-size: 0.9rem; color: var(--gray); }
+.contact-line strong { color: var(--white); }
+
+/* ─── MAPS ─── */
+#standort { background: #f8f8f6; padding: 0; }
+.map-wrapper { display: grid; grid-template-columns: 1fr 2fr; }
+.map-left { background: #f8f8f6; padding: 80px 6%; display: flex; flex-direction: column; justify-content: center; gap: 32px; border-right: 1px solid rgba(255,255,255,0.06); }
+.map-left .s-tag { color: var(--mid); }
+.map-left .s-title { color: var(--black); font-size: 2rem; }
+.map-address { color: var(--mid); font-size: 0.9rem; line-height: 2; }
+.map-address strong { color: var(--black); display: block; font-size: 1.1rem; margin-bottom: 8px; font-family: var(--serif); }
+.map-embed { height: 480px; }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(100%) contrast(1.15); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #181818; border-top: none;
+  padding: 80px 8% 60px;
+}
+
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 64px;
+}
+.footer-brand {}
+.footer-logo { font-family: var(--serif); font-size: 2rem; font-weight: 700; color: var(--white); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+.footer-tagline { color: #555; font-size: 0.85rem; line-height: 1.7; font-weight: 300; max-width: 240px; }
+.footer-col h5 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #555; margin-bottom: 20px; }
+.footer-col a { display: block; color: #444; font-size: 0.88rem; text-decoration: none; margin-bottom: 12px; transition: color 0.2s; }
+.footer-col a:hover { color: var(--white); }
+.footer-col p { color: #444; font-size: 0.88rem; line-height: 1.8; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 28px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 0.75rem; color: #333; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { color: #333; font-size: 0.75rem; text-decoration: none; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+
+
+
+
+
+
+/* ─── SCROLL REVEAL ─── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.vis { opacity: 1; transform: none; }
+.reveal-l { opacity: 0; transform: translateX(-24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-l.vis { opacity: 1; transform: none; }
+
+/* ─── TWEAKS PANEL ─── */
+#tweaks-panel {
+  display: none; position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+  background: var(--white); padding: 28px; width: 280px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.25);
+  border: 1px solid #e0e0e0;
+}
+#tweaks-panel h4 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 20px; }
+.tw-row { margin-bottom: 16px; }
+.tw-row label { display: block; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); margin-bottom: 6px; }
+.tw-row input[type=text] { width: 100%; padding: 9px 12px; border: 1px solid #e0e0e0; font-family: var(--sans); font-size: 0.88rem; outline: none; }
+.tw-row input[type=text]:focus { border-color: var(--black); }
+.tw-row select { width: 100%; padding: 9px 12px; border: 1px solid #e0e0e0; font-family: var(--sans); font-size: 0.88rem; background: white; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .about-grid, .booking-grid, .map-wrapper { grid-template-columns: 1fr; }
+  .services-layout { grid-template-columns: 1fr; }
+  .service-category { border-right: 0; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .map-embed { height: 300px; }
+  nav .nav-links a:not(.nav-book) { display: none; }
+  footer { grid-template-columns: 1fr; text-align: center; }
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-links { justify-content: center; }
+}
+@media (max-width: 600px) {
+  section { padding: 80px 5%; }
+  .f-row { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item.tall { grid-row: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Face Off</div>
+  <div class="nav-links">
+    <a href="#ueber-uns">Über uns</a>
+    <a href="#leistungen">Preise</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#buchung">Buchung</a>
+    <a href="#standort">Kontakt</a>
+    <a href="#buchung" class="nav-book">Termin buchen</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0; padding-top:72px;">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Friseursalon · Wiesbaden</div>
+    <h1>The Art<br>of <em>Perfect<br>Hair.</em></h1>
+    <p class="hero-desc">Exklusiver Friseursalon im Herzen Wiesbadens. Präzision, Stil und eine Atmosphäre, in der Sie zur Ruhe kommen.</p>
+    <div class="hero-ctas">
+      <a href="#buchung" class="btn-white">Termin vereinbaren</a>
+      <a href="#leistungen" class="btn-outline">Unsere Preise</a>
+    </div>
+    <div class="hero-phone">Direkt anrufen: <strong>0611 16854992</strong></div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-type-bg">
+      <span class="hero-type-word" style="font-family: Lato">FACE</span>
+      <span class="hero-type-word hero-type-off" style="font-family: Lato">OFF</span>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section id="ueber-uns">
+  <div class="max-w">
+    <div class="about-grid">
+      <div class="about-placeholder reveal-l">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="m3 9 4-4 4 4 4-4 4 4"/><path d="M3 15l4-4 4 4 4-4 4 4"/></svg>
+        <span>Salon-Foto einfügen</span>
+      </div>
+      <div class="reveal">
+        <div class="s-tag">Über uns</div>
+        <h2 class="s-title">Mehr als nur ein Haarschnitt –<br><em>ein Erlebnis.</em></h2>
+        <blockquote class="about-pull">"Jedes Detail zählt. Von der ersten Beratung bis zum letzten Schnitt."</blockquote>
+        <p class="about-detail">Face Off steht für handwerkliche Präzision, ehrliche Beratung und ein Ambiente, das Sie vergessen lässt, dass es draußen eine Stadt gibt. Unser Team aus erfahrenen Stylisten begleitet Sie – ob klassischer Schnitt, moderne Farbe oder die perfekte Hochzeitsfrisur.</p>
+        <p class="about-detail" style="margin-top:16px">Wir nehmen uns Zeit für Sie. Immer.</p>
+        <div style="display:flex; gap:48px; margin-top:40px">
+          <div>
+            <div style="font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--white)">12+</div>
+            <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-top:4px">Jahre Expertise</div>
+          </div>
+          <div>
+            <div style="font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--white)">800+</div>
+            <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-top:4px">Zufriedene Kunden</div>
+          </div>
+          <div>
+            <div style="font-family:var(--serif);font-size:2.4rem;font-weight:700;color:var(--white)">4.9★</div>
+            <div style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray);margin-top:4px">Google Bewertung</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEISTUNGEN & PREISE -->
+<section id="leistungen" style="color: rgb(118, 118, 118)">
+  <div class="max-w">
+    <div class="section-head reveal" style="margin-bottom:56px">
+      <div class="s-tag">Leistungen & Preise</div>
+      <h2 class="s-title">Unsere <em>Dienstleistungen</em></h2>
+      <p class="s-sub">Transparente Preise – keine versteckten Kosten. Der finale Preis nach kostenlosem Beratungsgespräch.</p>
+    </div>
+    <div class="services-layout reveal">
+      <div class="service-category">
+        <h3>Damen</h3>
+        <div class="price-row">
+          <div><div class="pname">Waschen & Schneiden</div><span class="pdesc">inkl. Föhnen & Styling</span></div>
+          <div class="pprice">ab 48 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Schneiden & Föhnen</div></div>
+          <div class="pprice">ab 38 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Föhnen & Styling</div></div>
+          <div class="pprice">ab 28 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Hochsteckfrisur</div><span class="pdesc">für besondere Anlässe</span></div>
+          <div class="pprice">ab 65 €</div>
+        </div>
+      </div>
+      <div class="service-category">
+        <h3>Herren</h3>
+        <div class="price-row">
+          <div><div class="pname">Haarschnitt</div><span class="pdesc">klassisch oder modern</span></div>
+          <div class="pprice">ab 25 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Waschen & Schnitt</div></div>
+          <div class="pprice">ab 32 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Bartpflege & Rasur</div><span class="pdesc">Nass- oder Trockenrasur</span></div>
+          <div class="pprice">ab 22 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Schnitt + Bart Kombi</div></div>
+          <div class="pprice">ab 45 €</div>
+        </div>
+      </div>
+      <div class="service-category">
+        <h3>Farbe & Behandlung</h3>
+        <div class="price-row">
+          <div><div class="pname">Komplettfärbung</div><span class="pdesc">inkl. Ansatz</span></div>
+          <div class="pprice">ab 60 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Balayage / Highlights</div><span class="pdesc">je nach Aufwand</span></div>
+          <div class="pprice">ab 90 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Haarpflege-Treatment</div><span class="pdesc">Tiefenpflege & Aufbau</span></div>
+          <div class="pprice">ab 35 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Tönung</div></div>
+          <div class="pprice">ab 40 €</div>
+        </div>
+      </div>
+      <div class="service-category">
+        <h3>Kinder & Special</h3>
+        <div class="price-row">
+          <div><div class="pname">Kinderhaarschnitt</div><span class="pdesc">bis 12 Jahre</span></div>
+          <div class="pprice">ab 18 €</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Bridal Styling</div><span class="pdesc">inkl. Probetermin</span></div>
+          <div class="pprice">auf Anfrage</div>
+        </div>
+        <div class="price-row">
+          <div><div class="pname">Kopfmassage</div><span class="pdesc">entspannend & pflegend</span></div>
+          <div class="pprice">ab 15 €</div>
+        </div>
+        <div class="service-note">
+          Alle Preise sind Startpreise. Der genaue Preis richtet sich nach Haarlänge, -dichte und Aufwand. Gern beraten wir Sie kostenlos.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie">
+  <div class="gallery-head reveal">
+    <div class="s-tag" style="color:var(--gray)">Portfolio</div>
+    <h2 class="s-title" style="color:var(--white)">Unsere <em>Arbeit</em></h2>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item tall gallery-ratio-1">
+      <svg viewBox="0 0 24 24"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"/></svg>
+      <div class="gallery-label">Schnitt & Style</div>
+    </div>
+    <div class="gallery-item gallery-ratio-2">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+      <div class="gallery-label">Balayage</div>
+    </div>
+    <div class="gallery-item gallery-ratio-2">
+      <svg viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg>
+      <div class="gallery-label">Highlights</div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 24 24"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"/></svg>
+      <div class="gallery-label">Herren</div>
+    </div>
+    <div class="gallery-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+      <div class="gallery-label">Bartpflege</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="max-w">
+    <div class="reveal" style="text-align:center; margin-bottom:52px">
+      <div class="s-tag" style="justify-content:center">Kundenstimmen</div>
+      <h2 class="s-title" style="text-align:center">Was unsere Kunden <em>sagen</em></h2>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Endlich ein Salon, bei dem man sich wirklich verstanden fühlt. Das Ergebnis hat meine Erwartungen übertroffen."</p>
+        <div class="reviewer">
+          <div class="reviewer-name">Sophia R.</div>
+          <div class="reviewer-sub">Wiesbaden-Nordost</div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Der beste Herrenhaarschnitt, den ich je hatte. Präzise, schnell, und die Atmosphäre ist einfach angenehm."</p>
+        <div class="reviewer">
+          <div class="reviewer-name">Markus T.</div>
+          <div class="reviewer-sub">Wiesbaden-Mitte</div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="review-text">"Meine Balayage ist traumhaft geworden. Genau das, was ich mir vorgestellt hatte – sogar besser."</p>
+        <div class="reviewer">
+          <div class="reviewer-name">Julia K.</div>
+          <div class="reviewer-sub">Mainz</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUCHUNG -->
+<section id="buchung">
+  <div class="max-w">
+    <div class="reveal">
+      <div class="s-tag">Termin</div>
+      <h2 class="s-title" style="color:var(--white)">Termin <em>vereinbaren</em></h2>
+      <p class="s-sub">Buchen Sie online oder rufen Sie direkt an – wir bestätigen Ihren Wunschtermin innerhalb von 24 Stunden.</p>
+    </div>
+    <div class="booking-grid">
+      <div class="booking-form reveal">
+        <h3>Ihre Terminanfrage</h3>
+        <div class="f-row">
+          <div class="f-group"><label>Vorname</label><input type="text" placeholder="Max"></div>
+          <div class="f-group"><label>Nachname</label><input type="text" placeholder="Mustermann"></div>
+        </div>
+        <div class="f-row">
+          <div class="f-group"><label>Telefon</label><input type="text" placeholder="0611 ..."></div>
+          <div class="f-group"><label>E-Mail</label><input type="text" placeholder="max@email.de"></div>
+        </div>
+        <div class="f-group">
+          <label>Gewünschte Leistung</label>
+          <select>
+            <option>Haarschnitt Damen</option>
+            <option>Haarschnitt Herren</option>
+            <option>Kinderhaarschnitt</option>
+            <option>Bartpflege & Rasur</option>
+            <option>Farbe / Balayage</option>
+            <option>Haarpflege-Treatment</option>
+            <option>Sonstiges</option>
+          </select>
+        </div>
+        <div class="f-row">
+          <div class="f-group"><label>Wunschdatum</label><input type="text" placeholder="TT.MM.JJJJ"></div>
+          <div class="f-group"><label>Wunschzeit</label><input type="text" placeholder="z.B. 10:00 Uhr"></div>
+        </div>
+        <div class="f-group">
+          <label>Anmerkungen</label>
+          <textarea placeholder="Besondere Wünsche, Haartyp, Referenzbilder-Beschreibung..."></textarea>
+        </div>
+        <button class="f-submit" onclick="sendBooking(event)">Termin anfragen →</button>
+      </div>
+      <div class="booking-info reveal">
+        <div class="booking-hours">
+          <h4>Öffnungszeiten</h4>
+          <table class="hours-table">
+            <tr><td>Montag</td><td>09:00 – 19:00 Uhr</td></tr>
+            <tr><td>Dienstag</td><td>09:00 – 19:00 Uhr</td></tr>
+            <tr><td>Mittwoch</td><td>09:00 – 19:00 Uhr</td></tr>
+            <tr><td>Donnerstag</td><td>09:00 – 20:00 Uhr</td></tr>
+            <tr><td>Freitag</td><td>09:00 – 20:00 Uhr</td></tr>
+            <tr><td>Samstag</td><td>09:00 – 17:00 Uhr</td></tr>
+            <tr class="closed"><td>Sonntag</td><td>Geschlossen</td></tr>
+          </table>
+        </div>
+        <div class="booking-contact">
+          <h4>Direktkontakt</h4>
+          <div class="contact-line">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6.09 6.09l1.79-1.79a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span><strong>0611 16854992</strong></span>
+          </div>
+          <div class="contact-line">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Bismarckring 4, <strong>65185 Wiesbaden</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPS -->
+<section id="standort" style="padding:0">
+  <div class="map-wrapper">
+    <div class="map-left" style="background-color: rgb(255, 255, 255)">
+      <div>
+        <div class="s-tag">Standort</div>
+        <h2 class="s-title" style="color: rgb(0, 0, 0)">So finden<br><em>Sie uns</em></h2>
+      </div>
+      <address class="map-address" style="font-style:normal">
+        <strong style="color: rgb(0, 0, 0)">Face Off</strong>
+        Bismarckring 4<br>
+        65185 Wiesbaden<br><br>
+        Tel: 0611 16854992
+      </address>
+    </div>
+    <div class="map-embed">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=8.22%2C50.07%2C8.26%2C50.09&layer=mapnik&marker=50.081%2C8.239"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">Face Off</span>
+      <p class="footer-tagline">Exklusiver Friseursalon im Herzen Wiesbadens. Präzision, Stil und Persönlichkeit – seit über 12 Jahren.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navigation</h5>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#leistungen">Leistungen & Preise</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#testimonials">Bewertungen</a>
+      <a href="#buchung">Termin buchen</a>
+    </div>
+    <div class="footer-col">
+      <h5>Öffnungszeiten</h5>
+      <p>Mo – Mi: 09–19 Uhr<br>Do – Fr: 09–20 Uhr<br>Sa: 09–17 Uhr<br>So: Geschlossen</p>
+    </div>
+    <div class="footer-col">
+      <h5>Kontakt</h5>
+      <p>Bismarckring 4<br>65185 Wiesbaden<br><br>0611 16854992</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Face Off Friseursalon · Wiesbaden</div>
+    <div class="footer-links">
+      <a href="#">Impressum</a>
+      <a href="#">Datenschutz</a>
+      <a href="#">AGB</a>
+    </div>
+  </div>
+</footer>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tw-row">
+    <label>Salonname</label>
+    <input type="text" id="tw-name" value="Face Off" oninput="applyTweaks()">
+  </div>
+  <div class="tw-row">
+    <label>Telefon</label>
+    <input type="text" id="tw-phone" value="0611 16854992" oninput="applyTweaks()">
+  </div>
+  <div class="tw-row">
+    <label>Schriftstil Überschriften</label>
+    <select id="tw-font" onchange="applyTweaks()">
+      <option value="'Playfair Display', Georgia, serif">Playfair (klassisch)</option>
+      <option value="'Cormorant Garamond', Georgia, serif">Cormorant (romantisch)</option>
+      <option value="'DM Sans', sans-serif">DM Sans (modern)</option>
+    </select>
+  </div>
+  <div class="tw-row">
+    <label>Hintergrundton Hero</label>
+    <select id="tw-hero" onchange="applyTweaks()">
+      <option value="#080808">Tiefschwarz</option>
+      <option value="#0f0f0f">Anthrazit</option>
+      <option value="#1a1409">Warmbraun-schwarz</option>
+    </select>
+  </div>
+</div>
+
+<script>
+// ─── TWEAKS ───
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+});
+window.parent.postMessage({type: '__edit_mode_available'}, '*');
+
+function applyTweaks() {
+  const name = document.getElementById('tw-name').value;
+  const phone = document.getElementById('tw-phone').value;
+  const font = document.getElementById('tw-font').value;
+  const heroBg = document.getElementById('tw-hero').value;
+
+  document.querySelector('.nav-logo').textContent = name;
+  document.querySelector('.footer-logo').textContent = name;
+  document.querySelectorAll('.hero-phone strong').forEach(el => el.textContent = phone);
+  document.documentElement.style.setProperty('--serif', font);
+  document.querySelector('.hero').style.background = heroBg;
+
+  window.parent.postMessage({type: '__edit_mode_set_keys', edits: {salonName: name, phone}}, '*');
+}
+
+// ─── BOOKING FORM ───
+function sendBooking(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.textContent = '✓ Anfrage gesendet – wir melden uns bald!';
+  btn.style.background = '#1a1a1a';
+  btn.style.letterSpacing = '0.08em';
+  setTimeout(() => {
+    btn.textContent = 'Termin anfragen →';
+    btn.style.background = '';
+  }, 5000);
+}
+
+// ─── SCROLL REVEAL ───
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-l').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
